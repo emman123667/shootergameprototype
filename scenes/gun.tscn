@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://drly1ihijpwlm"]
+
+[ext_resource type="Script" uid="uid://beblak8cqwdi6" path="res://scripts/gun.gd" id="1_x77fm"]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_x77fm")
+
+[connection signal="gunFire" from="." to="." method="_on_gun_fire"]
