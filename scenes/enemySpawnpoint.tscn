@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3va4e3nagx3r"]
+
+[ext_resource type="Script" uid="uid://c87s5wydh5tlf" path="res://scripts/enemy_spawnpoint.gd" id="1_2r2b0"]
+
+[node name="EnemySpawnpoint" type="Marker2D"]
+script = ExtResource("1_2r2b0")
+
+[node name="SpawnTimer" type="Timer" parent="."]

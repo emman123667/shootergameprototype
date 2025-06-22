@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu7cy8p5n5l1a"]
+
+[ext_resource type="PackedScene" uid="uid://fpo4yaaa2rou" path="res://scenes/enemy.tscn" id="1_cmj7v"]
+
+[node name="SuperEnemy" instance=ExtResource("1_cmj7v")]
+move_speed = 100.0
+health = 80
+
+[node name="Sprite" parent="." index="1"]
+modulate = Color(0.451926, 0.00143978, 0.653187, 1)
+
+[node name="EnemyShootTimer" parent="Gun" index="1"]
+wait_time = 0.5

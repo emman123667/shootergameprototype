@@ -1,16 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://mbt3dsro8bbs"]
+[gd_scene load_steps=5 format=3 uid="uid://mbt3dsro8bbs"]
 
-[ext_resource type="Script" uid="uid://cyn1ikj2xpo5j" path="res://scripts/game.gd" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://cyn1ikj2xpo5j" path="res://scripts/game_manager.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dkqnvfhoo284m" path="res://scenes/player.tscn" id="2_feb5d"]
-[ext_resource type="PackedScene" uid="uid://fpo4yaaa2rou" path="res://scenes/enemy.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://c3va4e3nagx3r" path="res://scenes/enemySpawnpoint.tscn" id="3_lnu2h"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lnu2h"]
+distance = -162.0
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_e2o6t")
+script = ExtResource("1_lnu2h")
 
 [node name="Player" parent="." instance=ExtResource("2_feb5d")]
 
-[node name="Enemy" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(-78, -3)
-
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="EnemySpawnpoints" type="Node2D" parent="."]
+
+[node name="EnemySpawnpoint2" parent="EnemySpawnpoints" node_paths=PackedStringArray("targetPlayer") instance=ExtResource("3_lnu2h")]
+position = Vector2(0, 162)
+targetPlayer = NodePath("../../Player")
+
+[node name="EnemySpawnpoint1" parent="EnemySpawnpoints" node_paths=PackedStringArray("targetPlayer") instance=ExtResource("3_lnu2h")]
+position = Vector2(0, -162)
+targetPlayer = NodePath("../../Player")
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+shape = SubResource("WorldBoundaryShape2D_lnu2h")
+
+[node name="WallBottom" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_lnu2h")
+
+[node name="WallLeft" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+position = Vector2(-126, 0)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_lnu2h")
+
+[node name="WallRight" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+position = Vector2(126, 0)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_lnu2h")

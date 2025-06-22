@@ -1,10 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://fpo4yaaa2rou"]
+[gd_scene load_steps=9 format=3 uid="uid://fpo4yaaa2rou"]
 
+[ext_resource type="Script" uid="uid://c0muxihevllw4" path="res://scripts/enemy.gd" id="1_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://bdxh5ta2pgkni" path="res://icon.svg" id="1_7p1mj"]
+[ext_resource type="PackedScene" uid="uid://d28srkui6xpgp" path="res://scenes/hitbox.tscn" id="2_md0e3"]
+[ext_resource type="PackedScene" uid="uid://b1oaalh62xl88" path="res://scenes/character_health_bar.tscn" id="2_xwavj"]
+[ext_resource type="Script" uid="uid://dm6x6o4f4dle7" path="res://scripts/enemy_shoot_timer.gd" id="4_5uy6h"]
+[ext_resource type="PackedScene" uid="uid://drly1ihijpwlm" path="res://scenes/gun.tscn" id="4_c4w8v"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1mj"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_7p1mj"]
+radius = 12.0416
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
+size = Vector2(30, 30)
 
 [node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_4ra3w")
+move_speed = 70.0
+health = 40
+damage = 10
+
+[node name="CharacterHealthBar" parent="." node_paths=PackedStringArray("character") instance=ExtResource("2_xwavj")]
+position = Vector2(-27, -27)
+scale = Vector2(0.5, 0.5)
+character = NodePath("..")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0.346577, 0.280009, 1)
@@ -12,4 +30,20 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_7p1mj")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_7p1mj")
+shape = SubResource("CircleShape2D_7p1mj")
+
+[node name="Hitbox" parent="." node_paths=PackedStringArray("hitboxOwner") instance=ExtResource("2_md0e3")]
+hitboxOwner = NodePath("..")
+
+[node name="HitboxCollisionShape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_md0e3")
+debug_color = Color(0.600384, 0.369019, 1, 0.42)
+
+[node name="Gun" parent="." node_paths=PackedStringArray("gunOwner") instance=ExtResource("4_c4w8v")]
+gunOwner = NodePath("..")
+
+[node name="EnemyShootTimer" type="Timer" parent="Gun" node_paths=PackedStringArray("gun")]
+wait_time = 2.0
+autostart = true
+script = ExtResource("4_5uy6h")
+gun = NodePath("..")
