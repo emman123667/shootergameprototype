@@ -1,16 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkqnvfhoo284m"]
+[gd_scene load_steps=10 format=3 uid="uid://dkqnvfhoo284m"]
 
 [ext_resource type="Texture2D" uid="uid://bdxh5ta2pgkni" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://db0ay5qt2evhn" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://drly1ihijpwlm" path="res://scenes/gun.tscn" id="2_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://b1oaalh62xl88" path="res://scenes/character_health_bar.tscn" id="2_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://d28srkui6xpgp" path="res://scenes/hitbox.tscn" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://ctmqwgqvqe5pu" path="res://scripts/close_radius.gd" id="6_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 size = Vector2(30, 30)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fjrip"]
+radius = 61.0082
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 5
@@ -40,6 +44,13 @@ hitboxOwner = NodePath("..")
 
 [node name="HitboxCollisionShape" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_dqkch")
-debug_color = Color(0.685838, 0.500495, 0, 0.42)
+debug_color = Color(0.544824, 0.39476, 8.66354e-07, 0.42)
+
+[node name="PlayerCloseRadius" type="Area2D" parent="."]
+script = ExtResource("6_tuyoq")
+
+[node name="CloseRadiusCollisionShape" type="CollisionShape2D" parent="PlayerCloseRadius"]
+shape = SubResource("CircleShape2D_fjrip")
+debug_color = Color(0.296746, 0.365477, 0.406156, 0.42)
 
 [connection signal="playerFire" from="." to="." method="_on_player_fire"]

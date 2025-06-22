@@ -2,16 +2,23 @@ class_name Enemy
 
 extends Character
 
+enum CurrentState {FOLLOW_PLAYER, STALL}
+
 @export var targetPlayer: Player
+var currentState: CurrentState
 
 @onready var hitbox: Hitbox = $Hitbox
 
 func _ready() -> void:
 	hitbox.isHit.connect(_onHitboxIsHit)
+	currentState = CurrentState.FOLLOW_PLAYER
 
 func _physics_process(delta: float) -> void:
 	# Follow the player
-	self.velocity = (targetPlayer.position - self.position).normalized() * move_speed
+	if currentState == CurrentState.FOLLOW_PLAYER:
+		self.velocity = (targetPlayer.position - self.position).normalized() * move_speed
+	elif currentState == CurrentState.STALL:
+		self.velocity = Vector2.ZERO
 	self.move_and_slide()
 
 func takeDamage(dmgSource: Bullet):
@@ -23,3 +30,6 @@ func _onHitboxIsHit(dmgSource: Bullet):
 	if dmgSource.alignment == dmgSource.Alignment.PLAYER:
 		takeDamage(dmgSource)
 		dmgSource.queue_free()
+
+func setCurrentState(newState: CurrentState):
+	currentState = newState

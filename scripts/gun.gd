@@ -1,5 +1,4 @@
-# Player's gun node script
-
+# Gun node script
 class_name Gun
 
 extends Node2D
