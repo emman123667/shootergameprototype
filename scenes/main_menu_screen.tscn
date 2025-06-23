@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvepkqo8naxar"]
+
+[ext_resource type="Texture2D" uid="uid://butjhu7djcfap" path="res://assets/logo.png" id="1_0ad5b"]
+[ext_resource type="PackedScene" uid="uid://cwhtfvdos2uo7" path="res://scenes/play_button.tscn" id="2_e7tdj"]
+
+[node name="MainMenuScreen" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(2.38419e-07, -45)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_0ad5b")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -203.0
+offset_top = 49.0
+offset_right = 212.0
+offset_bottom = 72.0
+text = "A  shooter game created by emman_123 (mantot_123)"
+horizontal_alignment = 1
+
+[node name="PlayButton" parent="." instance=ExtResource("2_e7tdj")]
+offset_left = -42.0
+offset_top = 85.0
+offset_bottom = 116.0

@@ -30,9 +30,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event) -> void:
-	if event.is_action_pressed("emit_test_signal"):
-		testSignal.emit()
-
 	if event.is_action_pressed("gun_shoot"):
 		playerFire.emit()
 

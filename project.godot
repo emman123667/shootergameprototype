@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GodotShooterGame"
-run/main_scene="uid://mbt3dsro8bbs"
+run/main_scene="uid://bvepkqo8naxar"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwhtfvdos2uo7"]
+
+[ext_resource type="Script" uid="uid://bwwh7d7qec1ij" path="res://scripts/play_button.gd" id="1_benoo"]
+
+[node name="PlayButton" type="Button"]
+offset_left = -41.0
+offset_top = 1.0
+offset_right = 46.0
+offset_bottom = 32.0
+text = "Play game"
+script = ExtResource("1_benoo")
