@@ -1,9 +1,8 @@
-extends Node2D
+extends Node
 
-@onready var player: Player = $Player
+@export var player: Player
 
-func _ready() -> void:
-    player.testSignal.connect(_on_player_test_signal)
+@onready var scoreTextLabel: Label  = $ScoreTextLabel
 
-func _on_player_test_signal() -> void:
-    print("Hello world!! This signal was emitted from the player!")
+func _process(delta: float) -> void:
+	scoreTextLabel.text = "Score: " + str(player.score)

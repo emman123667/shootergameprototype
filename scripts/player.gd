@@ -5,6 +5,8 @@ extends Character
 signal testSignal
 signal playerFire
 
+var score: int
+
 @onready var currentGun: Gun = $Gun
 @onready var hitbox: Hitbox = $Hitbox
 

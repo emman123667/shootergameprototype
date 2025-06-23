@@ -5,6 +5,8 @@ extends Character
 enum CurrentState {FOLLOW_PLAYER, STALL}
 
 @export var targetPlayer: Player
+@export var scoreIncrease: int
+
 var currentState: CurrentState
 
 @onready var hitbox: Hitbox = $Hitbox
@@ -24,6 +26,7 @@ func _physics_process(delta: float) -> void:
 func takeDamage(dmgSource: Bullet):
 	health = health - dmgSource.damage
 	if health <= 0:
+		targetPlayer.score += scoreIncrease
 		self.queue_free() # Removes the enemy from the scene tree
 
 func _onHitboxIsHit(dmgSource: Bullet):
