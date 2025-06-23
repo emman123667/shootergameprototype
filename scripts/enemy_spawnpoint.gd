@@ -14,15 +14,16 @@ func _ready() -> void:
 	spawnTimer.start()
 
 func _onSpawnTimerTimeout():
-	var enemy: Enemy
-	# 5% chance that the enemy spawnpoint would spawn a super enemy
-	var randNum = randf()
-	if randNum <= 0.05:
-		enemy = superEnemyScene.instantiate()
-	else:
-		enemy = enemyScene.instantiate()
+	for i in range(randi_range(1, 3)):
+		var enemy: Enemy
+		# 5% chance that the enemy spawnpoint would spawn a super enemy
+		var randNum = randf()
+		if randNum <= 0.05:
+			enemy = superEnemyScene.instantiate()
+		else:
+			enemy = enemyScene.instantiate()
 
-	enemy.targetPlayer = self.targetPlayer
-	enemy.global_position = self.global_position + Vector2(randf_range(-200.0, 200.0), 0)
-	self.get_tree().current_scene.add_child(enemy)
-	spawnTimer.wait_time = randf_range(1.0, 3.0)
+		enemy.targetPlayer = self.targetPlayer
+		enemy.global_position = self.global_position + Vector2(randf_range(-200.0, 200.0), 0)
+		self.get_tree().current_scene.add_child(enemy)
+	spawnTimer.wait_time = randf_range(3.50, 5.0)
